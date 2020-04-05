@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_anime/app/widgets/default_bottom_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -27,69 +28,35 @@ class HomePageState extends State<HomePage> {
           IconButton(icon: Icon(Icons.search), onPressed: (){})
         ],
       ),
-      bottomNavigationBar: ClipRRect(
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(36),
-          topRight: Radius.circular(36)
-        ),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          selectedItemColor: Theme.of(context).accentColor,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text("Inicio")
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.ondemand_video),
-              title: Text("En emisión")
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.collections_bookmark),
-              title: Text("Mi lista")
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.menu),
-              title: Text("Más")
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: DefaultBottomNavigationBar(),
       body: ListView(
-        // padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
         padding: EdgeInsets.only(top: 15, bottom: 15, left: 15, right: 10),
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(right: 10),
-                width: 6,
-                height: 14,
-                color: Theme.of(context).accentColor,
-              ),
-              Text("Lunes, 30 de Marzo, 2020")
-            ],
-          ),
+          _getSubtitle(text: "Lunes, 04 de Abril, 2020"),
           getCard(title: "Anohana", subtitle: "Pelicula", urlImage: imageUrl,),
           getCard(title: "ELfen Lied", subtitle: "Pelicula", urlImage: imageUrl,),
           getCard(title: "Litter Busted!", subtitle: "Pelicula", urlImage: imageUrl,),
-          Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(right: 10),
-                width: 6,
-                height: 14,
-                color: Theme.of(context).accentColor,
-              ),
-              Text("Domingo, 29 de Marzo, 2020")
-            ],
+          _getSubtitle(text: "Domingo, 03 de Abril, 2020"),
+          getCard(title: "Anohana", subtitle: "Pelicula", urlImage: imageUrl,),
+          getCard(title: "Anohana", subtitle: "Pelicula", urlImage: imageUrl,),
+          getCard(title: "Anohana", subtitle: "Pelicula", urlImage: imageUrl,),
+        ],
+      ),
+    );
+  }
+
+  Widget _getSubtitle({@required String text}){
+    return Padding(
+      padding: EdgeInsets.only(top: 15, bottom: 8),
+      child: Row(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(right: 10),
+            width: 5,
+            height: 15,
+            color: Theme.of(context).accentColor,
           ),
-          getCard(title: "Anohana", subtitle: "Pelicula", urlImage: imageUrl,),
-          getCard(title: "Anohana", subtitle: "Pelicula", urlImage: imageUrl,),
-          getCard(title: "Anohana", subtitle: "Pelicula", urlImage: imageUrl,),
+          Text(text)
         ],
       ),
     );
@@ -180,19 +147,11 @@ class HomePageState extends State<HomePage> {
         Positioned(
           right: 0,
           bottom: 0,
-          child: InkWell(
-            onTap: (){
-              print("reproduce :v");
-            },
-            child: Container(
-              width: 42,
-              height: 42,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: Theme.of(context).accentColor
-              ),
-              child: Icon(Icons.play_arrow, size: 28,),
-            ),
+          width: 42,
+          height: 42,
+          child: FloatingActionButton(
+            onPressed: (){},
+            child: Icon(Icons.play_arrow, color: Theme.of(context).primaryIconTheme.color),
           ),
         )
       ],
